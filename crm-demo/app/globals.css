@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+html { height: 100%; }
+body {
+  height: 100%;
+  background: #f9fafb;
+  color: #111827;
+  -webkit-font-smoothing: antialiased;
+}
