@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CDM Labs — Descargar Logo</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f5f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 32px;
+    }
+    h1 { font-size: 14px; color: #6e6e73; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; }
+    canvas { border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+    .btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    button {
+      background: #1d1d1f; color: #fff;
+      border: none; border-radius: 980px;
+      padding: 14px 28px; font-size: 15px; font-weight: 600;
+      cursor: pointer; transition: 0.2s;
+    }
+    button:hover { background: #3d3d3f; transform: scale(1.02); }
+    button.green { background: #10b981; }
+    button.green:hover { background: #059669; }
+    p { font-size: 12px; color: #86868b; max-width: 400px; text-align: center; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+  <h1>CDM Labs — Logo</h1>
+  <canvas id="logo" width="1000" height="1000"></canvas>
+
+  <div class="btns">
+    <button class="green" onclick="download('png')">⬇ Descargar PNG (1000×1000)</button>
+    <button onclick="download('instagram')">📱 Instagram (500×500)</button>
+  </div>
+
+  <p>Formato recomendado para perfil de Instagram: 500×500px PNG con fondo negro. El logo se muestra recortado en círculo en Instagram.</p>
+
+<script>
+function drawLogo(canvas, size) {
+  const ctx = canvas.getContext('2d');
+  const W = size;
+  canvas.width = W;
+  canvas.height = W;
+  const cx = W / 2;
+  const cy = W / 2;
+
+  // ── Background ──────────────────────────────────────────
+  // Full black square background (for Instagram)
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, 0, W, W);
+
+  // ── Card ────────────────────────────────────────────────
+  const cardSize = W * 0.64;
+  const radius   = W * 0.115;
+  const cardX    = cx - cardSize / 2;
+  const cardY    = cy - cardSize / 2;
+
+  // Card shadow / glow
+  ctx.shadowColor = 'rgba(16,185,129,0.35)';
+  ctx.shadowBlur  = W * 0.1;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = W * 0.03;
+
+  // Card background
+  roundRect(ctx, cardX, cardY, cardSize, cardSize, radius);
+  ctx.fillStyle = '#1d1d1f';
+  ctx.fill();
+
+  // Reset shadow
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur  = 0;
+  ctx.shadowOffsetY = 0;
+
+  // Card border (subtle)
+  roundRect(ctx, cardX, cardY, cardSize, cardSize, radius);
+  ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // ── Top accent bar ───────────────────────────────────────
+  const barW = cardSize * 0.38;
+  const barH = W * 0.007;
+  const barY = cardY + cardSize * 0.20;
+  const grad1 = ctx.createLinearGradient(cx - barW/2, barY, cx + barW/2, barY);
+  grad1.addColorStop(0,   'transparent');
+  grad1.addColorStop(0.5, '#10b981');
+  grad1.addColorStop(1,   'transparent');
+  ctx.fillStyle = grad1;
+  ctx.beginPath();
+  ctx.roundRect(cx - barW/2, barY, barW, barH, barH/2);
+  ctx.fill();
+
+  // ── CDM text ─────────────────────────────────────────────
+  const cdmSize = W * 0.185;
+  ctx.font = `900 ${cdmSize}px -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif`;
+  ctx.letterSpacing = `${W * 0.006}px`;
+  ctx.fillStyle = '#ffffff';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('CDM', cx, cy - W * 0.025);
+
+  // ── LABS text ────────────────────────────────────────────
+  const labsSize = W * 0.062;
+  ctx.font = `700 ${labsSize}px -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif`;
+  ctx.letterSpacing = `${W * 0.022}px`;
+  ctx.fillStyle = '#10b981';
+  ctx.fillText('LABS', cx + W*0.014, cy + W * 0.115);
+
+  // ── Bottom accent bar ────────────────────────────────────
+  const barY2 = cardY + cardSize * 0.80;
+  const grad2 = ctx.createLinearGradient(cx - barW/2, barY2, cx + barW/2, barY2);
+  grad2.addColorStop(0,   'transparent');
+  grad2.addColorStop(0.5, '#10b981');
+  grad2.addColorStop(1,   'transparent');
+  ctx.fillStyle = grad2;
+  ctx.beginPath();
+  ctx.roundRect(cx - barW/2, barY2, barW, barH, barH/2);
+  ctx.fill();
+
+  // ── Corner dots (decorative) ─────────────────────────────
+  const dotR  = W * 0.008;
+  const dotOff = W * 0.075;
+  [[cardX + dotOff, cardY + dotOff],
+   [cardX + cardSize - dotOff, cardY + dotOff],
+   [cardX + dotOff, cardY + cardSize - dotOff],
+   [cardX + cardSize - dotOff, cardY + cardSize - dotOff]
+  ].forEach(([x, y]) => {
+    ctx.beginPath();
+    ctx.arc(x, y, dotR, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(16,185,129,0.25)';
+    ctx.fill();
+  });
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+function download(type) {
+  const size = type === 'instagram' ? 500 : 1000;
+  const tmp = document.createElement('canvas');
+  drawLogo(tmp, size);
+  const a = document.createElement('a');
+  a.download = type === 'instagram' ? 'CDMLabs-instagram-500.png' : 'CDMLabs-logo-1000.png';
+  a.href = tmp.toDataURL('image/png');
+  a.click();
+}
+
+// Draw preview at 1000px
+drawLogo(document.getElementById('logo'), 1000);
+</script>
+</body>
+</html>
