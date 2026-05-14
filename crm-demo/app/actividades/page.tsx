@@ -44,7 +44,7 @@ export default function ActividadesPage() {
       </div>
 
       {/* Alerts */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
         {/* Overdue */}
         <div className={`rounded-xl border p-4 ${overdue.length > 0 ? "border-red-200 bg-red-50" : "border-gray-200 bg-gray-50"}`}>
           <div className="flex items-center gap-2 mb-3">

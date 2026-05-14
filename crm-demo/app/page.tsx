@@ -75,7 +75,7 @@ export default function Dashboard() {
       </div>
 
       {/* KPIs — 6 cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 mb-8">
         {[
           { label: "Contactos activos",  value: activeContacts,   icon: Users,       color: "text-blue-600",    bg: "bg-blue-50"   },
           { label: "Leads calientes",    value: hotLeads,         icon: TrendingUp,  color: "text-red-500",     bg: "bg-red-50"    },
@@ -94,7 +94,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
 
         {/* Pipeline chart */}
         <div className="xl:col-span-2 bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -156,7 +156,7 @@ export default function Dashboard() {
 
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-6">
 
         {/* Top deals */}
         <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -262,7 +262,7 @@ export default function Dashboard() {
             Ver todo <ArrowUpRight size={12} />
           </a>
         </div>
-        <div className="px-5 py-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+        <div className="px-4 py-3 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-3">
           {recentActivities.map((a) => (
             <div key={a.id} className="flex flex-col gap-1.5 p-3 bg-gray-50 rounded-lg">
               <div className="flex items-center gap-2">

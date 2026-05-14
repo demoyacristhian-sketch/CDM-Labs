@@ -32,7 +32,7 @@ export default function ContactosPage() {
   return (
     <div className="p-6 lg:p-8 max-w-[1400px] w-full mx-auto pb-12">
       {/* Header */}
-      <div className="mb-8 flex items-start justify-between gap-4">
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Contactos</h1>
           <p className="text-sm text-gray-500 mt-1">{contacts.length} contactos registrados</p>
@@ -53,7 +53,7 @@ export default function ContactosPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
         {contacts.map((c) => {
           const temp = tempConfig[c.temperature];
           return (

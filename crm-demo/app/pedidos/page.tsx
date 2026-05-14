@@ -31,7 +31,7 @@ export default function PedidosPage() {
       </div>
 
       {/* KPI row */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
         {[
           { label: "Ingresos totales",   value: `€${(totalRevenue/1000).toFixed(1)}k`, color: "text-emerald-600", bg: "bg-emerald-50", icon: <CheckCircle2 size={16} className="text-emerald-600" /> },
           { label: "Pedidos activos",    value: activeCount,                           color: "text-blue-600",    bg: "bg-blue-50",    icon: <Package size={16} className="text-blue-600" /> },

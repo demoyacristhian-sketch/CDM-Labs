@@ -26,7 +26,7 @@ export default function DealsPage() {
   return (
     <div className="p-6 lg:p-8 max-w-[1200px] w-full mx-auto pb-12">
       {/* Header */}
-      <div className="mb-8 flex items-start justify-between gap-4">
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Deals</h1>
           <p className="text-sm text-gray-500 mt-1">{deals.length} oportunidades · €{totalPipeline.toLocaleString("es")} en pipeline</p>
@@ -37,7 +37,7 @@ export default function DealsPage() {
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 mb-8">
         {stages.map(stage => {
           const stageDeals = deals.filter(d => d.stage === stage);
           const stageTotal = stageDeals.reduce((s, d) => s + d.value, 0);
