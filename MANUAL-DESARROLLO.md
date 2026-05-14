@@ -516,8 +516,8 @@ npx vercel login
 ### 9.2 Clonar el repositorio
 
 ```bash
-git clone https://github.com/cristhiandemoya/cdm-labs.git
-cd cdm-labs
+git clone https://github.com/demoyacristhian-sketch/CDM-Labs.git
+cd CDM-Labs
 ```
 
 ### 9.3 Setup del Portfolio

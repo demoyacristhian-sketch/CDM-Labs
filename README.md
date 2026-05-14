@@ -33,6 +33,10 @@ CDM-Labs/
 - **n8n**: `cristhian-de-moya-lab-1-n8n.idv05l.easypanel.host`
 - **Google Sheet posts**: [Abrir](https://docs.google.com/spreadsheets/d/1B5iXgUaW2jq3u4wG9ocxDpTvqcRYMaJMCuHYHztkuUk)
 
+## Repositorio GitHub
+
+🔗 **https://github.com/demoyacristhian-sketch/CDM-Labs**
+
 ## Guía rápida para nuevo equipo
 
 Ver [MANUAL-DESARROLLO.md](./MANUAL-DESARROLLO.md) para instrucciones completas de instalación, credenciales y continuación del proyecto.
