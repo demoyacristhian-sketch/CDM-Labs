@@ -84,8 +84,8 @@ CDM-Labs/
 
 | Recurso | URL | Estado |
 |---|---|---|
-| Portfolio personal | https://portfolio-ekio.vercel.app | ✅ Público |
-| CRM Demo | https://crm-demo-ekio.vercel.app | ✅ Público |
+| Portfolio personal | https://portfolio-cdmlabs.vercel.app | ✅ Público |
+| CRM Demo | https://crm-demo-cdmlabs.vercel.app | ✅ Público |
 | Repositorio GitHub | https://github.com/demoyacristhian-sketch/CDM-Labs | ✅ Público |
 | n8n (automatización) | https://cristhian-de-moya-lab-1-n8n.idv05l.easypanel.host | ✅ Activo |
 | Google Sheets (posts) | https://docs.google.com/spreadsheets/d/1B5iXgUaW2jq3u4wG9ocxDpTvqcRYMaJMCuHYHztkuUk | ✅ Activo |
@@ -178,7 +178,7 @@ Se construyeron 9 componentes:
 - Tarjeta extra: "¿Algo específico?" con CTA a contacto
 
 **Projects.tsx**
-- EKIO CRM Demo → enlace a crm-demo-ekio.vercel.app (datos ficticios, LDPD)
+- EKIO CRM Demo → enlace a crm-demo-cdmlabs.vercel.app (datos ficticios, LDPD)
 - EKIO Coach → enlace a ekio-coach.vercel.app
 - LinkedIn Automation → proyecto interno (sin enlace)
 - Nota legal LDPD: el CRM real está protegido
@@ -212,7 +212,7 @@ Tras revisión con screenshots:
 12. Proyecto EKIO CRM: eliminado link directo (LDPD) → reemplazado con "Ver demo"
 
 #### Paso 10 — Deploy del portfolio
-- Deploy en Vercel: https://portfolio-ekio.vercel.app
+- Deploy en Vercel: https://portfolio-cdmlabs.vercel.app
 - SSO Protection desactivada para acceso público sin cuenta Vercel
 - Accesible por cualquier persona sin login
 
@@ -292,7 +292,7 @@ Creados datos realistas que representan el tipo de negocio:
 **Sidebar** actualizado con 6 secciones + logo CDM Labs + badge "Versión Demo"
 
 #### Paso 14 — Deploy del CRM Demo
-- Deploy en Vercel: https://crm-demo-ekio.vercel.app
+- Deploy en Vercel: https://crm-demo-cdmlabs.vercel.app
 - SSO Protection desactivada (acceso público)
 - Portfolio actualizado: card EKIO CRM enlaza al demo
 
@@ -328,8 +328,8 @@ Creados datos realistas que representan el tipo de negocio:
 
 | Sistema | URL | Estado |
 |---|---|---|
-| Portfolio personal | portfolio-ekio.vercel.app | En producción |
-| CRM Demo | crm-demo-ekio.vercel.app | En producción |
+| Portfolio personal | portfolio-cdmlabs.vercel.app | En producción |
+| CRM Demo | crm-demo-cdmlabs.vercel.app | En producción |
 | Automatización LinkedIn | n8n EasyPanel | Activo |
 | Token LinkedIn (auto-renovación) | n8n workflow | Activo (50 días) |
 | Publicador LinkedIn | n8n workflow | Activo (Lun/Mié/Vie) |

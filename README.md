@@ -6,8 +6,8 @@
 
 | Proyecto | URL | Stack | Estado |
 |---|---|---|---|
-| **Portfolio** | [portfolio-ekio.vercel.app](https://portfolio-ekio.vercel.app) | Next.js 16 · Tailwind v4 | ✅ Producción |
-| **CRM Demo** | [crm-demo-ekio.vercel.app](https://crm-demo-ekio.vercel.app) | Next.js 16 · Tailwind v4 | ✅ Producción |
+| **Portfolio** | [portfolio-cdmlabs.vercel.app](https://portfolio-cdmlabs.vercel.app) | Next.js 16 · Tailwind v4 | ✅ Producción |
+| **CRM Demo** | [crm-demo-cdmlabs.vercel.app](https://crm-demo-cdmlabs.vercel.app) | Next.js 16 · Tailwind v4 | ✅ Producción |
 | **n8n Automation** | [n8n en EasyPanel](https://cristhian-de-moya-lab-1-n8n.idv05l.easypanel.host) | n8n v1.123.21 | ✅ Activo |
 
 ## Estructura del repositorio
@@ -29,7 +29,7 @@ CDM-Labs/
 
 ## Accesos rápidos
 
-- **Vercel Team**: `ekio` → [vercel.com/ekio](https://vercel.com/ekio)
+- **Vercel Team**: `ekio` → [vercel.com/cdmlabs](https://vercel.com/cdmlabs)
 - **n8n**: `cristhian-de-moya-lab-1-n8n.idv05l.easypanel.host`
 - **Google Sheet posts**: [Abrir](https://docs.google.com/spreadsheets/d/1B5iXgUaW2jq3u4wG9ocxDpTvqcRYMaJMCuHYHztkuUk)
 

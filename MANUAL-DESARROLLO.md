@@ -36,8 +36,8 @@
 
 | Recurso | URL |
 |---|---|
-| Portfolio | https://portfolio-ekio.vercel.app |
-| CRM Demo | https://crm-demo-ekio.vercel.app |
+| Portfolio | https://portfolio-cdmlabs.vercel.app |
+| CRM Demo | https://crm-demo-cdmlabs.vercel.app |
 | n8n (self-hosted) | https://cristhian-de-moya-lab-1-n8n.idv05l.easypanel.host |
 | Google Sheet posts | https://docs.google.com/spreadsheets/d/1B5iXgUaW2jq3u4wG9ocxDpTvqcRYMaJMCuHYHztkuUk |
 
@@ -72,10 +72,10 @@
 
 ### 3.1 Vercel
 
-- **Team**: `ekio`
+- **Team**: `cdmlabs`
 - **Proyectos**: `portfolio`, `crm-demo`
 - **CLI**: `npx vercel --prod --yes` desde cada carpeta de proyecto
-- **Dashboard**: https://vercel.com/ekio
+- **Dashboard**: https://vercel.com/cdmlabs
 
 ### 3.2 n8n (EasyPanel)
 
@@ -122,8 +122,8 @@
 ## 4. Portfolio Personal
 
 **Carpeta**: `portfolio/`  
-**URL producción**: https://portfolio-ekio.vercel.app  
-**Vercel project**: `ekio/portfolio`
+**URL producción**: https://portfolio-cdmlabs.vercel.app  
+**Vercel project**: `cdmlabs/portfolio`
 
 ### 4.1 Stack técnico
 
@@ -184,7 +184,7 @@ portfolio/
 
 | Proyecto | Estado | Link | Nota |
 |---|---|---|---|
-| EKIO CRM Demo | ✅ Live | https://crm-demo-ekio.vercel.app | Datos ficticios (LDPD) |
+| EKIO CRM Demo | ✅ Live | https://crm-demo-cdmlabs.vercel.app | Datos ficticios (LDPD) |
 | EKIO Coach | ✅ Live | https://ekio-coach.vercel.app | App real |
 | LinkedIn Automation | 🔒 Interno | — | Sistema interno CDM Labs |
 
@@ -201,7 +201,7 @@ npx vercel --prod --yes
 ## 5. CRM Demo
 
 **Carpeta**: `crm-demo/`  
-**URL producción**: https://crm-demo-ekio.vercel.app  
+**URL producción**: https://crm-demo-cdmlabs.vercel.app  
 **Vercel project**: `ekio/crm-demo`
 
 ### 5.1 Stack técnico
@@ -372,7 +372,7 @@ npx vercel --prod --yes
   - `Stack.tsx` — Tecnologías por categoría
   - `Contact.tsx` — LinkedIn, email, teléfono, España
   - `Footer.tsx` — CDM Labs + año + España
-- [x] **Despliegue** en Vercel team `ekio` → `portfolio-ekio.vercel.app`
+- [x] **Despliegue** en Vercel team `ekio` → `portfolio-cdmlabs.vercel.app`
 
 #### Correcciones aplicadas al portfolio
 
@@ -399,7 +399,7 @@ npx vercel --prod --yes
 - [x] Datos ficticios en `lib/data.ts` (8 contactos, 8 deals)
 - [x] Páginas: Dashboard, Contactos, Pipeline
 - [x] Sidebar: CDM Labs logo, nav básico
-- [x] Primer despliegue → `crm-demo-ekio.vercel.app`
+- [x] Primer despliegue → `crm-demo-cdmlabs.vercel.app`
 - [x] Portfolio actualizado: enlaza al CRM Demo
 
 #### Expansión completa del CRM Demo
@@ -531,7 +531,7 @@ npm run dev    # localhost:3000
 Para desplegar:
 ```bash
 npx vercel --prod --yes
-# Vercel lo detecta automáticamente como proyecto "ekio/portfolio"
+# Vercel lo detecta automáticamente como proyecto "cdmlabs/portfolio"
 ```
 
 ### 9.4 Setup del CRM Demo

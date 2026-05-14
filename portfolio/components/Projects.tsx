@@ -8,7 +8,7 @@ const projects = [
     subtitle: "Sistema operativo completo",
     desc: "CRM en producción real para gestión de pedidos, stock, facturación, atención al cliente y seguimiento diario. Integrado con Shopify, GLS, Holded y SeQura.",
     tags: ["React", "Supabase", "Vercel", "n8n", "Shopify API"],
-    url: "https://crm-demo-ekio.vercel.app",
+    url: "https://crm-demo-cdmlabs.vercel.app",
     status: "live",
     statusLabel: "Ver demo",
     accentBg: "bg-[#f0fdf4]",
