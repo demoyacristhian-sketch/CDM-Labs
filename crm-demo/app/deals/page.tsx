@@ -24,7 +24,7 @@ export default function DealsPage() {
   const convRate      = Math.round((deals.filter(d => d.stage === "cerrado").length / deals.length) * 100);
 
   return (
-    <div className="p-8 max-w-6xl">
+    <div className="p-6 lg:p-8 max-w-[1200px] w-full mx-auto pb-12">
       {/* Header */}
       <div className="mb-8 flex items-start justify-between gap-4">
         <div>

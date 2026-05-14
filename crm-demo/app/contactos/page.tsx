@@ -30,7 +30,7 @@ export default function ContactosPage() {
   const calientes = contacts.filter(c => c.temperature === "caliente").length;
 
   return (
-    <div className="p-8 max-w-7xl">
+    <div className="p-6 lg:p-8 max-w-[1400px] w-full mx-auto pb-12">
       {/* Header */}
       <div className="mb-8 flex items-start justify-between gap-4">
         <div>

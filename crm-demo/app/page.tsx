@@ -67,7 +67,7 @@ const maxTotal = Math.max(...stageData.map(d => d.total), 1);
 
 export default function Dashboard() {
   return (
-    <div className="p-8 max-w-7xl">
+    <div className="p-6 lg:p-8 max-w-[1400px] w-full mx-auto pb-12">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>

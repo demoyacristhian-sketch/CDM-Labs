@@ -23,7 +23,7 @@ export default function PedidosPage() {
   const incidencias = orders.filter(o => o.status === "incidencia").length;
 
   return (
-    <div className="p-8 max-w-6xl">
+    <div className="p-6 lg:p-8 max-w-[1100px] w-full mx-auto pb-12">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Pedidos</h1>

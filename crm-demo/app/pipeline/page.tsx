@@ -10,7 +10,7 @@ export default function PipelinePage() {
   }));
 
   return (
-    <div className="p-8">
+    <div className="p-6 lg:p-8 pb-12 w-full">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Pipeline de Ventas</h1>
         <p className="text-sm text-gray-500 mt-1">
@@ -18,8 +18,8 @@ export default function PipelinePage() {
         </p>
       </div>
 
-      {/* Kanban */}
-      <div className="flex gap-4 overflow-x-auto pb-4">
+      {/* Kanban — horizontal scroll */}
+      <div className="flex gap-4 overflow-x-auto pb-6" style={{ WebkitOverflowScrolling: "touch" }}>
         {byStage.map(({ stage, deals: stageDeals, total }) => (
           <div key={stage} className="shrink-0 w-64">
             {/* Column header */}
