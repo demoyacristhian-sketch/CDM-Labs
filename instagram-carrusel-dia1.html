@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CDM Labs — Carrusel Día 1</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 80px;
+      gap: 0;
+    }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .page-header h1 { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+    .page-header p { color: #6e6e73; font-size: 13px; }
+    .badge {
+      display: inline-block; margin-top: 10px;
+      background: #10b981; color: #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: .06em;
+      padding: 4px 12px; border-radius: 99px;
+    }
+
+    /* Slide wrapper */
+    .slides-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .slide-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .slide-label {
+      color: #6e6e73;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* THE SLIDE — 1080x1080 scaled to 540x540 for preview */
+    .slide {
+      width: 540px;
+      height: 540px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      cursor: default;
+      flex-shrink: 0;
+    }
+
+    /* ── SHARED SLIDE BASE ── */
+    .slide-inner {
+      width: 1080px;
+      height: 1080px;
+      transform: scale(0.5);
+      transform-origin: top left;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 96px;
+    }
+
+    /* ── BACKGROUNDS ── */
+    .bg-dark    { background: #0d0d0d; }
+    .bg-darker  { background: #070707; }
+    .bg-card    { background: #141414; }
+
+    /* Top accent bar */
+    .accent-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, transparent, #10b981 40%, #10b981 60%, transparent);
+    }
+
+    /* Bottom accent bar */
+    .accent-bar-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, transparent, #10b981 40%, #10b981 60%, transparent);
+    }
+
+    /* Slide number */
+    .slide-num {
+      position: absolute;
+      top: 52px;
+      right: 72px;
+      font-size: 22px;
+      font-weight: 700;
+      color: rgba(16,185,129,0.35);
+      letter-spacing: .02em;
+    }
+
+    /* CDM mark bottom left */
+    .cdm-mark {
+      position: absolute;
+      bottom: 52px;
+      left: 72px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .cdm-logo {
+      width: 44px; height: 44px;
+      background: #1d1d1f;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cdm-logo span {
+      color: #fff;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+    .cdm-text p:first-child {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .cdm-text p:last-child {
+      color: #10b981;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1;
+      margin-top: 4px;
+    }
+
+    /* Swipe hint */
+    .swipe-hint {
+      position: absolute;
+      bottom: 52px;
+      right: 72px;
+      color: rgba(255,255,255,0.2);
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: .04em;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .tag {
+      display: inline-block;
+      background: rgba(16,185,129,0.12);
+      color: #10b981;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border-radius: 99px;
+      border: 1px solid rgba(16,185,129,0.25);
+      margin-bottom: 44px;
+    }
+
+    .headline {
+      color: #ffffff;
+      font-size: 88px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+    .headline .green { color: #10b981; }
+    .headline .dim { color: rgba(255,255,255,0.55); }
+
+    .subline {
+      color: rgba(255,255,255,0.65);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-top: 36px;
+    }
+
+    .body-text {
+      color: rgba(255,255,255,0.80);
+      font-size: 46px;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+    .body-text strong { color: #fff; font-weight: 700; }
+    .body-text .green { color: #10b981; font-weight: 600; }
+
+    .big-quote {
+      color: #ffffff;
+      font-size: 68px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -.01em;
+    }
+    .big-quote .dim { color: rgba(255,255,255,0.45); font-weight: 400; }
+
+    .divider {
+      width: 80px;
+      height: 3px;
+      background: #10b981;
+      border-radius: 2px;
+      margin: 48px 0;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+    .list-dot {
+      width: 12px; height: 12px;
+      background: #10b981;
+      border-radius: 50%;
+      margin-top: 20px;
+      flex-shrink: 0;
+    }
+    .list-text {
+      color: rgba(255,255,255,0.80);
+      font-size: 46px;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+    .list-text strong { color: #fff; font-weight: 700; }
+
+    /* Slide 1 special */
+    .s1-day {
+      font-size: 28px;
+      font-weight: 700;
+      color: #10b981;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+    }
+
+    /* Slide 7 CTA */
+    .cta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      background: #10b981;
+      color: #fff;
+      font-size: 38px;
+      font-weight: 700;
+      padding: 26px 56px;
+      border-radius: 99px;
+      margin-top: 56px;
+      letter-spacing: -.01em;
+    }
+
+    /* Grid decoration */
+    .grid-dots {
+      position: absolute;
+      top: 0; right: 0;
+      width: 320px; height: 320px;
+      opacity: 0.04;
+      background-image: radial-gradient(#10b981 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    /* Download btn */
+    .dl-btn {
+      background: #1d1d1f;
+      color: #fff;
+      border: 1px solid #2d2d2f;
+      border-radius: 99px;
+      padding: 10px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dl-btn:hover { background: #2d2d2f; }
+    .dl-btn.primary { background: #10b981; border-color: #10b981; }
+    .dl-btn.primary:hover { background: #059669; }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    /* Caption box */
+    .caption-box {
+      background: #141414;
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-top: 40px;
+      max-width: 600px;
+      width: 100%;
+    }
+    .caption-box h3 {
+      color: #10b981;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .caption-box p {
+      color: #d1d5db;
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>CDM Labs — Carrusel Día 1</h1>
+  <p>7 slides · 1080 × 1080 px · Instagram</p>
+  <div class="badge">Listo para publicar</div>
+</div>
+
+<div class="slides-grid">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 1 — HOOK
+  ══════════════════════════════════════════ -->
+  <div class="slide-wrapper">
+    <span class="slide-label">Slide 1 — Hook (portada)</span>
+    <div class="slide" id="s1">
+      <div class="slide-inner bg-darker">
+        <div class="accent-bar"></div>
+        <div class="grid-dots"></div>
+        <div class="slide-num">01</div>
+
+        <div class="s1-day">Día 1</div>
+        <div class="headline">
+          Estoy<br>
+          construyendo<br>
+          <span class="green">esto contigo.</span>
+        </div>
+        <div class="subline">
+          Te cuento por qué abrí esta cuenta.
+        </div>
+
+        <div class="swipe-hint">desliza →</div>
+        <div class="cdm-mark">
+          <div class="cdm-logo"><span>CDM</span></div>
+          <div class="cdm-text">
+            <p>Cristhian De Moya</p>
+            <p>@cdmlabs</p>
+          </div>
+        </div>
+        <div class="accent-bar-bottom"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="dl-btn primary" onclick="downloadSlide('s1','slide1-hook')">⬇ Descargar slide 1</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 2 — CONTEXTO PERSONAL
+  ══════════════════════════════════════════ -->
+  <div class="slide-wrapper">
+    <span class="slide-label">Slide 2 — Contexto personal</span>
+    <div class="slide" id="s2">
+      <div class="slide-inner bg-dark">
+        <div class="accent-bar"></div>
+        <div class="slide-num">02</div>
+
+        <div class="big-quote">
+          Tengo trabajo.<br>
+          Tengo facturas.<br>
+          <span class="dim">Y tengo un proyecto</span><br>
+          que estoy construyendo<br>
+          <span style="color:#10b981">al mismo tiempo.</span>
+        </div>
+
+        <div class="cdm-mark">
+          <div class="cdm-logo"><span>CDM</span></div>
+          <div class="cdm-text"><p>Cristhian De Moya</p><p>@cdmlabs</p></div>
+        </div>
+        <div class="swipe-hint">→</div>
+        <div class="accent-bar-bottom"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="dl-btn" onclick="downloadSlide('s2','slide2-contexto')">⬇ Descargar slide 2</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 3 — QUIÉN SOY
+  ══════════════════════════════════════════ -->
+  <div class="slide-wrapper">
+    <span class="slide-label">Slide 3 — Quién soy</span>
+    <div class="slide" id="s3">
+      <div class="slide-inner bg-card">
+        <div class="accent-bar"></div>
+        <div class="slide-num">03</div>
+
+        <div class="tag">Soy Cristhian</div>
+        <div class="body-text">
+          Aprendo a <strong>construir sistemas</strong> para negocios.<br><br>
+          CRMs, automatizaciones,<br>
+          flujos que hacen el trabajo solo.<br><br>
+          <span class="green">Lo estoy aplicando en mi propio proyecto</span><br>
+          mientras aprendo.
+        </div>
+
+        <div class="cdm-mark">
+          <div class="cdm-logo"><span>CDM</span></div>
+          <div class="cdm-text"><p>Cristhian De Moya</p><p>@cdmlabs</p></div>
+        </div>
+        <div class="swipe-hint">→</div>
+        <div class="accent-bar-bottom"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="dl-btn" onclick="downloadSlide('s3','slide3-quien')">⬇ Descargar slide 3</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 4 — DE QUÉ VA ESTA CUENTA
+  ══════════════════════════════════════════ -->
+  <div class="slide-wrapper">
+    <span class="slide-label">Slide 4 — De qué va la cuenta</span>
+    <div class="slide" id="s4">
+      <div class="slide-inner bg-darker">
+        <div class="accent-bar"></div>
+        <div class="grid-dots"></div>
+        <div class="slide-num">04</div>
+
+        <div class="headline" style="font-size:72px;margin-bottom:56px;">
+          Esta cuenta<br>
+          <span class="green">no va</span> de consejos.
+        </div>
+
+        <div class="list-item">
+          <div class="list-dot"></div>
+          <div class="list-text">Lo que <strong>estoy aprendiendo</strong></div>
+        </div>
+        <div class="list-item">
+          <div class="list-dot"></div>
+          <div class="list-text">Lo que <strong>me falla</strong> y cómo lo arreglo</div>
+        </div>
+        <div class="list-item">
+          <div class="list-dot"></div>
+          <div class="list-text">Lo que <strong>por fin funciona</strong></div>
+        </div>
+
+        <div class="cdm-mark">
+          <div class="cdm-logo"><span>CDM</span></div>
+          <div class="cdm-text"><p>Cristhian De Moya</p><p>@cdmlabs</p></div>
+        </div>
+        <div class="swipe-hint">→</div>
+        <div class="accent-bar-bottom"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="dl-btn" onclick="downloadSlide('s4','slide4-dequeva')">⬇ Descargar slide 4</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 5 — EL PROCESO REAL
+  ══════════════════════════════════════════ -->
+  <div class="slide-wrapper">
+    <span class="slide-label">Slide 5 — El proceso real</span>
+    <div class="slide" id="s5">
+      <div class="slide-inner bg-dark">
+        <div class="accent-bar"></div>
+        <div class="slide-num">05</div>
+
+        <div class="big-quote">
+          Aprendo<br>
+          e implemento<br>
+          <span style="color:#10b981">al mismo tiempo.</span>
+        </div>
+        <div class="divider"></div>
+        <div class="body-text" style="font-size:40px;">
+          Con aciertos.<br>
+          Con errores.<br>
+          Con el objetivo de mejorar<br>
+          cada dia.
+        </div>
+
+        <div class="cdm-mark">
+          <div class="cdm-logo"><span>CDM</span></div>
+          <div class="cdm-text"><p>Cristhian De Moya</p><p>@cdmlabs</p></div>
+        </div>
+        <div class="swipe-hint">→</div>
+        <div class="accent-bar-bottom"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="dl-btn" onclick="downloadSlide('s5','slide5-proceso')">⬇ Descargar slide 5</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 6 — PARA QUIÉN ES
+  ══════════════════════════════════════════ -->
+  <div class="slide-wrapper">
+    <span class="slide-label">Slide 6 — Para quién es</span>
+    <div class="slide" id="s6">
+      <div class="slide-inner bg-card">
+        <div class="accent-bar"></div>
+        <div class="slide-num">06</div>
+
+        <div class="body-text" style="font-size:50px; margin-bottom:44px;">
+          Si tambien estas<br>
+          <strong>construyendo algo</strong><br>
+          mientras trabajas...
+        </div>
+        <div class="body-text" style="font-size:50px; margin-bottom:44px;">
+          O quieres entender<br>
+          <strong>como automatizar</strong><br>
+          sin que se complique...
+        </div>
+        <div class="body-text" style="font-size:50px;">
+          <span class="green"><strong>Esto es para ti.</strong></span>
+        </div>
+
+        <div class="cdm-mark">
+          <div class="cdm-logo"><span>CDM</span></div>
+          <div class="cdm-text"><p>Cristhian De Moya</p><p>@cdmlabs</p></div>
+        </div>
+        <div class="swipe-hint">→</div>
+        <div class="accent-bar-bottom"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="dl-btn" onclick="downloadSlide('s6','slide6-paraquien')">⬇ Descargar slide 6</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 7 — CTA FINAL
+  ══════════════════════════════════════════ -->
+  <div class="slide-wrapper">
+    <span class="slide-label">Slide 7 — CTA final</span>
+    <div class="slide" id="s7">
+      <div class="slide-inner bg-darker" style="align-items:center; text-align:center; padding:100px 80px;">
+        <div class="accent-bar"></div>
+        <div class="grid-dots"></div>
+        <div class="slide-num">07</div>
+
+        <div style="font-size:96px; margin-bottom:24px;">🛠</div>
+        <div class="headline" style="font-size:82px; text-align:center;">
+          Bienvenido<br>
+          al <span class="green">proceso.</span>
+        </div>
+        <div class="cta-pill">
+          Seguir → @cdmlabs
+        </div>
+
+        <div class="cdm-mark" style="left:50%; transform:translateX(-50%); bottom:52px;">
+          <div class="cdm-logo"><span>CDM</span></div>
+          <div class="cdm-text"><p>Cristhian De Moya</p><p>@cdmlabs</p></div>
+        </div>
+        <div class="accent-bar-bottom"></div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="dl-btn primary" onclick="downloadSlide('s7','slide7-cta')">⬇ Descargar slide 7</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════
+     CAPTION
+══════════════════════════════════════════ -->
+<div class="caption-box">
+  <h3>Caption listo para copiar</h3>
+  <p id="caption-text">Dia 1 de esta cuenta. Te cuento por que la abri. 👇
+
+No soy experto en nada. Tengo trabajo, tengo facturas,
+y tengo un proyecto que estoy construyendo al mismo tiempo.
+
+Me llamo Cristhian. Estoy aprendiendo a construir sistemas
+para negocios: CRMs, automatizaciones, flujos que funcionan solos.
+Lo estoy aplicando en mi propio proyecto mientras aprendo.
+
+Esta cuenta va del proceso real.
+De lo que aprendo, de lo que me falla,
+y de lo que por fin funciona.
+
+Con aciertos. Con errores.
+Con el objetivo de mejorar cada dia.
+
+Si tu tambien estas construyendo algo mientras trabajas,
+o quieres ver como se automatiza un negocio desde cero...
+bienvenido al proceso. 🛠
+
+Desliza y cuéntame en comentarios: ¿en qué estás tú trabajando?
+
+#construyendoenpublico #sideproject #emprendimientoreal #automatizacion #n8n #proyectodigital #emprendedores #marcapersonal #trabajandoymontando #aprendizajecontinuo #sistemasdenegocios #startupespana #ecommerceautomatizacion</p>
+  <button class="dl-btn" style="margin-top:16px;" onclick="copyCaption()">📋 Copiar caption</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+async function downloadSlide(slideId, filename) {
+  const slideWrapper = document.getElementById(slideId);
+  const inner = slideWrapper.querySelector('.slide-inner');
+
+  // Temporarily scale to full 1080x1080
+  inner.style.transform = 'scale(1)';
+  inner.style.transformOrigin = 'top left';
+  slideWrapper.style.width = '1080px';
+  slideWrapper.style.height = '1080px';
+  slideWrapper.style.overflow = 'visible';
+
+  try {
+    const canvas = await html2canvas(inner, {
+      width: 1080,
+      height: 1080,
+      scale: 1,
+      useCORS: true,
+      backgroundColor: null,
+      logging: false,
+    });
+
+    const a = document.createElement('a');
+    a.download = `CDMLabs-${filename}.png`;
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  } finally {
+    inner.style.transform = 'scale(0.5)';
+    inner.style.transformOrigin = 'top left';
+    slideWrapper.style.width = '540px';
+    slideWrapper.style.height = '540px';
+    slideWrapper.style.overflow = 'hidden';
+  }
+}
+
+function copyCaption() {
+  const text = document.getElementById('caption-text').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Caption copiado al portapapeles!');
+  });
+}
+</script>
+</body>
+</html>

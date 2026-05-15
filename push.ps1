@@ -4,7 +4,7 @@
 
 param([string]$msg = "")
 
-$repoPath = "C:\Users\me-la\OneDrive\Escritorio\CRISTHIAN DE MOYA LAB"
+$repoPath = "C:\Users\me-la\OneDrive\Escritorio\CDM LABS"
 Set-Location $repoPath
 
 $status = git status --short 2>&1
